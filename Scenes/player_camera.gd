@@ -26,4 +26,4 @@ func _process(_delta):
 	global_transform.origin = global_transform.origin.lerp(target_position, smoothing)
 	
 	# Make the camera look at the player (optional)
-	#look_at(player_pos, Vector3.UP)
+	look_at(player_pos, Vector3.UP)
