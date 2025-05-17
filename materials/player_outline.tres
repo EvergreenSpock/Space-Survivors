@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://5lef2ia5brq8"]
+
+[resource]
+cull_mode = 1
+shading_mode = 0
+heightmap_scale = -0.677
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+grow = true
+grow_amount = 0.03
+use_particle_trails = true

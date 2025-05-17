@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://bt2urfpnm2ffx"]
+
+[ext_resource type="PackedScene" uid="uid://c6u5ykn5w58he" path="res://Scenes/player.tscn" id="1_52fb6"]
+[ext_resource type="Texture2D" uid="uid://bejqxhj4aasnp" path="res://Scenes/panorama_image.png" id="2_6l7je"]
+[ext_resource type="PackedScene" uid="uid://7yh2vnfxixgn" path="res://Scenes/Camera.tscn" id="2_jv6wh"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jv6wh"]
+panorama = ExtResource("2_6l7je")
+
+[sub_resource type="Sky" id="Sky_x6ack"]
+sky_material = SubResource("PanoramaSkyMaterial_jv6wh")
+
+[sub_resource type="Environment" id="Environment_iacmt"]
+background_mode = 2
+sky = SubResource("Sky_x6ack")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6l7je"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6l7je"]
+size = Vector3(60, 1, 60)
+
+[node name="Main Scene" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_52fb6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="PlayerCamera" parent="Player" instance=ExtResource("2_jv6wh")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_iacmt")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+shape = SubResource("BoxShape3D_6l7je")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = SubResource("BoxMesh_6l7je")
+skeleton = NodePath("../CollisionShape3D")
