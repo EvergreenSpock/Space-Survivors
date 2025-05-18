@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bt2urfpnm2ffx"]
+[gd_scene load_steps=10 format=3 uid="uid://bt2urfpnm2ffx"]
 
 [ext_resource type="PackedScene" uid="uid://c6u5ykn5w58he" path="res://Scenes/player.tscn" id="1_52fb6"]
 [ext_resource type="Texture2D" uid="uid://bejqxhj4aasnp" path="res://Scenes/panorama_image.png" id="2_6l7je"]
 [ext_resource type="PackedScene" uid="uid://7yh2vnfxixgn" path="res://Scenes/Camera.tscn" id="2_jv6wh"]
+[ext_resource type="Script" uid="uid://crwcjkj3lujl7" path="res://Scenes/fuel_meter.gd" id="3_x6ack"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jv6wh"]
 panorama = ExtResource("2_6l7je")
@@ -26,6 +27,14 @@ size = Vector3(60, 1, 60)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="PlayerCamera" parent="Player" instance=ExtResource("2_jv6wh")]
+
+[node name="FuelMeterBar" type="ColorRect" parent="Player/PlayerCamera"]
+offset_left = 11.0
+offset_top = 628.0
+offset_right = 111.0
+offset_bottom = 637.0
+color = Color(1, 0.854902, 0, 1)
+script = ExtResource("3_x6ack")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_iacmt")

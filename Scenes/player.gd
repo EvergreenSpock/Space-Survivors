@@ -1,7 +1,16 @@
 extends CharacterBody3D
 
+# Default stats/settings (could export these and allow them to be changed with upgrades)
+var default_speed = 14
+var boosted_speed = 28
+var max_fuel = 100
+
 # How fast the player moves in meters per second.
-@export var speed = 14
+@export var speed = default_speed
+
+# Player stats
+@export var fuel_level = max_fuel
+@export var fuel_exhausted = false
 
 # The downward acceleration when in the air, in meters per second squared.
 #@export var fall_acceleration = 75
@@ -49,17 +58,33 @@ func _physics_process(_delta):
 		get_parent().add_child(instance2)
 		
 	# If boosting, increase the speed & turn on particles
-	if Input.is_action_pressed("boost"):
-		speed = 28
+	if Input.is_action_pressed("boost") and fuel_level > 0 and not fuel_exhausted:
+		
+		speed = boosted_speed
 		
 		leftBoostTrail.emitting = true
 		rightBoostTrail.emitting = true
 		
-	else: # could probably do this better and not have run every update frame
-		speed = 14
+		fuel_level -= 1
+		
+	# If boosting and run the fuel to 0, temporarily prevent boosting
+	elif Input.is_action_pressed("boost") and fuel_level < 1:
+		fuel_exhausted = true
+		speed = default_speed
 		
 		leftBoostTrail.emitting = false
 		rightBoostTrail.emitting = false
+		
+		$FuelExhaustion.start()
+		
+	else: # could probably do this better and not have run every update frame
+		speed = default_speed
+		
+		leftBoostTrail.emitting = false
+		rightBoostTrail.emitting = false
+		
+		if fuel_level < max_fuel:
+			fuel_level += 1
 
 
 	if direction != Vector3.ZERO:
@@ -81,3 +106,7 @@ func _physics_process(_delta):
 
 func _on_bullet_cooldown_timeout() -> void:
 	bullet_cooldown_is_ready = true; # Replace with function body.
+
+
+func _on_fuel_exhaustion_timeout() -> void:
+	fuel_exhausted = false
