@@ -85,7 +85,13 @@ process_material = SubResource("ParticleProcessMaterial_vgqql")
 draw_pass_1 = SubResource("BoxMesh_fkybt")
 
 [node name="Pew Pew" parent="Pivot" instance=ExtResource("6_x3wgy")]
-transform = Transform3D(0.502697, 0, 0, 0, 0.502697, 0, 0, 0, 0.502697, 1.04193, -0.225412, -0.373868)
+transform = Transform3D(0.502697, 0, 0, 0, 0.502697, 0, 0, 0, 0.502697, 1.042, -0.225, -1)
 
 [node name="Pew Pew 2" parent="Pivot" instance=ExtResource("6_x3wgy")]
-transform = Transform3D(0.502697, 0, 0, 0, 0.502697, 0, 0, 0, 0.502697, -1.042, -0.225, -0.374)
+transform = Transform3D(0.502697, 0, 0, 0, 0.502697, 0, 0, 0, 0.502697, -1.042, -0.225, -1)
+
+[node name="BulletCooldown" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="BulletCooldown" to="." method="_on_bullet_cooldown_timeout"]

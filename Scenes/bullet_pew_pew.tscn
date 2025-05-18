@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://1nhd3a5u1jpc"]
+[gd_scene load_steps=8 format=3 uid="uid://1nhd3a5u1jpc"]
 
 [ext_resource type="Script" uid="uid://ckw7bes84l73f" path="res://Scenes/bullet_pew_pew.gd" id="1_1ncwr"]
 
@@ -6,14 +6,34 @@
 size = Vector3(0.2, 0.2, 1.7)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ulxrd"]
-disable_ambient_light = true
 albedo_color = Color(2.79158e-06, 0.554049, 0.700845, 1)
 emission_enabled = true
-emission = Color(1, 0.0745098, 0, 1)
-emission_energy_multiplier = 3.0
+emission = Color(0, 0.552941, 0.701961, 1)
+emission_energy_multiplier = 5.0
 disable_receive_shadows = true
 
-[node name="Bullet pew pew" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ncwr"]
+albedo_color = Color(0, 0.552941, 0.701961, 1)
+emission_enabled = true
+emission = Color(0, 0.552941, 0.701961, 1)
+emission_energy_multiplier = 8.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1ncwr"]
+emission_shape_scale = Vector3(1, 2, 1)
+direction = Vector3(1, 0, 1)
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+radial_velocity_min = 0.999978
+radial_velocity_max = 5.99998
+
+[sub_resource type="BoxMesh" id="BoxMesh_e24mp"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1ncwr"]
+size = Vector3(0.2, 0.2, 2)
+
+[node name="Bullet pew pew" type="RigidBody3D"]
+collision_layer = 2
 script = ExtResource("1_1ncwr")
 
 [node name="BulletMesh" type="MeshInstance3D" parent="."]
@@ -23,3 +43,23 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ulxrd")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -1.5)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.185701, 0, -0.982606, 0, 1, 0, 0.982606, 0, 0.185701, 0, 0, -0.873206)
+material_override = SubResource("StandardMaterial3D_1ncwr")
+emitting = false
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_1ncwr")
+draw_pass_1 = SubResource("BoxMesh_e24mp")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_1ncwr")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
