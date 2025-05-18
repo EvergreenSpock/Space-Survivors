@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ckw7bes84l73f" path="res://Scenes/bullet_pew_pew.gd" id="1_1ncwr"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ulxrd"]
-size = Vector3(0.2, 0.2, 2)
+size = Vector3(0.2, 0.2, 1.7)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ulxrd"]
 disable_ambient_light = true
