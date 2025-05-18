@@ -11,6 +11,14 @@ var target_velocity = Vector3.ZERO
 var leftBoostTrail: GPUParticles3D
 var rightBoostTrail: GPUParticles3D
 
+#Bullets
+var bullet = load("res://Scenes/bullet_pew_pew.tscn")
+var instance
+var instance2
+
+@onready var gunBarrel = $"Pivot/Pew Pew/RayCast3D"
+@onready var gunBarrel2 = $"Pivot/Pew Pew 2/RayCast3D"
+
 func _ready():
 	leftBoostTrail = get_node("Pivot/MicroRecon/LeftEngineBoostTrail")
 	rightBoostTrail = get_node("Pivot/MicroRecon/RightEngineBoostTrail")
@@ -26,7 +34,15 @@ func _physics_process(_delta):
 		direction.z += 1
 	if Input.is_action_pressed("move_forward"):
 		direction.z -= 1
-
+	if Input.is_action_just_pressed("pew_pew_button"):
+		instance = bullet.instantiate()
+		instance2 = bullet.instantiate()
+		instance.position = gunBarrel.global_position
+		instance2.position = gunBarrel2.global_position
+		instance.transform.basis = gunBarrel.global_transform.basis
+		instance2.transform.basis = gunBarrel2.global_transform.basis
+		get_parent().add_child(instance)
+		get_parent().add_child(instance2)
 	# If boosting, increase the speed & turn on particles
 	if Input.is_action_pressed("boost"):
 		speed = 28

@@ -1,14 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://c6u5ykn5w58he"]
+[gd_scene load_steps=13 format=3 uid="uid://c6u5ykn5w58he"]
 
 [ext_resource type="Script" uid="uid://bxdcj8mj2kw38" path="res://Scenes/player.gd" id="1_6t5aa"]
 [ext_resource type="ArrayMesh" uid="uid://cdbtdc7f2rprm" path="res://Package/MicroRecon.obj" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://u1uhwdy3s5o" path="res://Scenes/right_click.gd" id="2_vgqql"]
 [ext_resource type="Script" uid="uid://v4kqg6pdjofy" path="res://Scenes/spot_light.gd" id="3_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://dn2jalcw8una5" path="res://Package/MicroRecon.png" id="4_fkybt"]
+[ext_resource type="PackedScene" uid="uid://2kop233hul0b" path="res://Scenes/pew_pew.tscn" id="6_x3wgy"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cvnsp"]
 radius = 1.21254
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v0iea"]
+[sub_resource type="Skin" id="Skin_vgqql"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x3wgy"]
+albedo_texture = ExtResource("4_fkybt")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vgqql"]
 
@@ -35,10 +40,10 @@ script = ExtResource("2_vgqql")
 
 [node name="MicroRecon" type="MeshInstance3D" parent="Pivot"]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
-material_overlay = SubResource("ShaderMaterial_v0iea")
 cast_shadow = 0
 mesh = ExtResource("1_v0iea")
-skeleton = NodePath("../..")
+skin = SubResource("Skin_vgqql")
+surface_material_override/0 = SubResource("StandardMaterial3D_x3wgy")
 
 [node name="LeftWingLight" type="OmniLight3D" parent="Pivot/MicroRecon"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2016, 0.266279, 0.200357)
@@ -78,3 +83,9 @@ lifetime = 0.4
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_vgqql")
 draw_pass_1 = SubResource("BoxMesh_fkybt")
+
+[node name="Pew Pew" parent="Pivot" instance=ExtResource("6_x3wgy")]
+transform = Transform3D(0.502697, 0, 0, 0, 0.502697, 0, 0, 0, 0.502697, 1.04193, -0.225412, -0.373868)
+
+[node name="Pew Pew 2" parent="Pivot" instance=ExtResource("6_x3wgy")]
+transform = Transform3D(0.502697, 0, 0, 0, 0.502697, 0, 0, 0, 0.502697, -1.042, -0.225, -0.374)

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://1nhd3a5u1jpc"]
+
+[ext_resource type="Script" uid="uid://ckw7bes84l73f" path="res://Scenes/bullet_pew_pew.gd" id="1_1ncwr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ulxrd"]
+size = Vector3(0.2, 0.2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ulxrd"]
+disable_ambient_light = true
+albedo_color = Color(2.79158e-06, 0.554049, 0.700845, 1)
+emission_enabled = true
+emission = Color(1, 0.0745098, 0, 1)
+emission_energy_multiplier = 3.0
+disable_receive_shadows = true
+
+[node name="Bullet pew pew" type="Node3D"]
+script = ExtResource("1_1ncwr")
+
+[node name="BulletMesh" type="MeshInstance3D" parent="."]
+gi_mode = 0
+mesh = SubResource("BoxMesh_ulxrd")
+surface_material_override/0 = SubResource("StandardMaterial3D_ulxrd")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -1.5)
