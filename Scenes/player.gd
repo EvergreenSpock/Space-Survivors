@@ -1,8 +1,9 @@
 extends CharacterBody3D
 
 # Default stats/settings (could export these and allow them to be changed with upgrades)
-var default_speed = 14
-var boosted_speed = 28
+var default_speed := 14
+var boosted_speed := 28
+var rotation_speed := 12
 var max_fuel = 100
 
 # How fast the player moves in meters per second.
@@ -26,8 +27,11 @@ var instance
 var instance2
 var bullet_cooldown_is_ready:bool = true
 
+#Bullet raycasts for the primary gun. Should probably separated into a separate class so that we can just import the classes when the upgrade and change weapons.
 @onready var gunBarrel = $"Pivot/Pew Pew/RayCast3D"
 @onready var gunBarrel2 = $"Pivot/Pew Pew 2/RayCast3D"
+# The last movement or aim direction input by the player
+@onready var _last_input_direction := global_basis.z
 
 func _ready():
 	leftBoostTrail = get_node("Pivot/MicroRecon/LeftEngineBoostTrail")
