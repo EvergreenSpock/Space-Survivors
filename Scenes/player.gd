@@ -1,9 +1,9 @@
 extends CharacterBody3D
 
 # Default stats/settings (could export these and allow them to be changed with upgrades)
-var default_speed := 14
-var boosted_speed := 28
-var rotation_speed := 12
+var default_speed := 20
+var boosted_speed := 36
+var rotation_speed := 8
 var max_fuel = 100
 
 # How fast the player moves in meters per second.
@@ -93,7 +93,11 @@ func _physics_process(_delta):
 
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
-		$Pivot.basis = Basis.looking_at(direction)
+		var current_basis = $Pivot.global_transform.basis
+		var target_basis = Basis().looking_at(direction, Vector3.UP)
+		$Pivot.global_transform.basis = current_basis.slerp(target_basis, rotation_speed * _delta)
+
+
 
 	# Ground Velocity
 	target_velocity.x = direction.x * speed
@@ -104,7 +108,8 @@ func _physics_process(_delta):
 		#target_velocity.y = target_velocity.y
 
 	# Moving the Character
-	velocity = target_velocity
+	# Smoothly interpolate current velocity toward target
+	velocity = velocity.lerp(target_velocity, 0.1)
 	move_and_slide()
 
 
