@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c6u5ykn5w58he" path="res://Scenes/player.tscn" id="1_52fb6"]
 [ext_resource type="Texture2D" uid="uid://bejqxhj4aasnp" path="res://Scenes/panorama_image.png" id="2_6l7je"]
 [ext_resource type="PackedScene" uid="uid://7yh2vnfxixgn" path="res://Scenes/Camera.tscn" id="2_jv6wh"]
-[ext_resource type="Script" uid="uid://crwcjkj3lujl7" path="res://Scenes/fuel_meter.gd" id="3_x6ack"]
+[ext_resource type="Script" uid="uid://crwcjkj3lujl7" path="res://Scripts/fuel_meter.gd" id="3_x6ack"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jv6wh"]
 panorama = ExtResource("2_6l7je")

@@ -6,5 +6,5 @@ extends ColorRect
 func _ready():
 	meter_bar.size.x = player.fuel_level
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	meter_bar.size.x = player.fuel_level

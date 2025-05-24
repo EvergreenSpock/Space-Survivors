@@ -1,4 +1,5 @@
-extends CharacterBody3D
+extends "res://Scripts/ship.gd"
+
 
 # Default stats/settings (could export these and allow them to be changed with upgrades)
 var default_speed := 20
@@ -31,7 +32,6 @@ var bullet_cooldown_is_ready:bool = true
 @onready var gunBarrel = $"Pivot/Pew Pew/RayCast3D"
 @onready var gunBarrel2 = $"Pivot/Pew Pew 2/RayCast3D"
 # The last movement or aim direction input by the player
-@onready var _last_input_direction := global_basis.z
 
 func _ready():
 	leftBoostTrail = get_node("Pivot/MicroRecon/LeftEngineBoostTrail")
@@ -94,7 +94,7 @@ func _physics_process(_delta):
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
 		var current_basis = $Pivot.global_transform.basis
-		var target_basis = Basis().looking_at(direction, Vector3.UP)
+		var target_basis = Basis.looking_at(direction, Vector3.UP)
 		$Pivot.global_transform.basis = current_basis.slerp(target_basis, rotation_speed * _delta)
 
 

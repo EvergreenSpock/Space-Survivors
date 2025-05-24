@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://c6u5ykn5w58he"]
+[gd_scene load_steps=12 format=3 uid="uid://c6u5ykn5w58he"]
 
-[ext_resource type="Script" uid="uid://bxdcj8mj2kw38" path="res://Scenes/player.gd" id="1_6t5aa"]
+[ext_resource type="Script" uid="uid://bxdcj8mj2kw38" path="res://Scripts/player.gd" id="1_6t5aa"]
 [ext_resource type="ArrayMesh" uid="uid://cdbtdc7f2rprm" path="res://Package/MicroRecon.obj" id="1_v0iea"]
-[ext_resource type="Script" uid="uid://u1uhwdy3s5o" path="res://Scenes/right_click.gd" id="2_vgqql"]
-[ext_resource type="Script" uid="uid://v4kqg6pdjofy" path="res://Scenes/spot_light.gd" id="3_6t5aa"]
+[ext_resource type="Script" uid="uid://v4kqg6pdjofy" path="res://Scripts/spot_light.gd" id="3_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://dn2jalcw8una5" path="res://Package/MicroRecon.png" id="4_fkybt"]
 [ext_resource type="PackedScene" uid="uid://2kop233hul0b" path="res://Scenes/pew_pew.tscn" id="6_x3wgy"]
 
@@ -36,7 +35,6 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("SphereShape3D_cvnsp")
 
 [node name="Pivot" type="Node3D" parent="."]
-script = ExtResource("2_vgqql")
 
 [node name="MicroRecon" type="MeshInstance3D" parent="Pivot"]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
