@@ -27,7 +27,7 @@ func apply_damage(amount: int) -> void:
 		health = max(health - remaining, 0)
 
 	# Visual feedback always
-	flash_damage()
+	#flash_damage()
 	
 
 	print("Ship took ", amount, " damage! Remaining health: ", health)
@@ -38,15 +38,15 @@ func apply_damage(amount: int) -> void:
 	if health == 0:
 		queue_free()
 
-func flash_damage():
-	if not mesh:
-		return
-
-	var shader_material := mesh.get_active_material(0) as ShaderMaterial
-	if shader_material:
-		shader_material.set_shader_parameter("intensity", 0.8)
-		await get_tree().create_timer(0.8).timeout
-		shader_material.set_shader_parameter("intensity", 0.0)
+#func flash_damage():
+	#if not mesh:
+		#return
+#
+	#var shader_material := mesh.get_active_material(0) as ShaderMaterial
+	#if shader_material:
+		#shader_material.set_shader_parameter("intensity", 0.8)
+		#await get_tree().create_timer(0.8).timeout
+		#shader_material.set_shader_parameter("intensity", 0.0)
 
 func emit_stats() -> void:
 	stats_changed.emit(health, max_health, shield, max_shield)

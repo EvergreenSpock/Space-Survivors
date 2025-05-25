@@ -8,10 +8,10 @@ extends "res://Scripts/ship.gd"
 @onready var player = get_node("../Player")
 var can_fire := true
 
-func _ready() -> void:
-	var shader_mat := mesh.get_active_material(0) as ShaderMaterial
+#func _ready() -> void:
+	#var shader_mat := mesh.get_active_material(0) as ShaderMaterial
 	#if shader_mat and shader_mat.has_parameter("tex"):
-	shader_mat.set_shader_parameter("tex", preload("res://Package/Enemy_Warship/Warship.png"))
+	#shader_mat.set_shader_parameter("tex", preload("res://Package/Enemy_Warship/Warship.png"))
 func ai_get_direction():
 	return player.position - self.position
 func ai_move():
