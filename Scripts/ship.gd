@@ -6,6 +6,9 @@ extends CharacterBody3D
 @onready var mesh: Node3D = get_node_or_null("Pivot/ShipMesh") \
 	if get_node_or_null("Pivot/ShipMesh") != null else get_node_or_null("ShipMesh")
 
+@onready var hitflashanim: AnimationPlayer = get_node_or_null("Pivot/ShipMesh/hitflashanim") \
+	if get_node_or_null("Pivot/ShipMesh/hitflashanim") != null else get_node_or_null("ShipMesh/hitflashanim")
+
 var health := max_health
 var shield := max_shield
 
@@ -39,7 +42,7 @@ func apply_damage(amount: int) -> void:
 		queue_free()
 
 func flash_damage():
-	$ShipMesh/hitflashanim.play("hit")
+	hitflashanim.play("hit")
 	#if not mesh:
 		#return
 #

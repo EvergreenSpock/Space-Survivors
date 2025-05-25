@@ -27,10 +27,12 @@ var bullet = load("res://Scenes/bullet_pew_pew.tscn")
 var instance
 var instance2
 var bullet_cooldown_is_ready:bool = true
+var can_fire := true
 
 #Bullet raycasts for the primary gun. Should probably separated into a separate class so that we can just import the classes when the upgrade and change weapons.
 @onready var gunBarrel = $"Pivot/Pew Pew/RayCast3D"
 @onready var gunBarrel2 = $"Pivot/Pew Pew 2/RayCast3D"
+
 # The last movement or aim direction input by the player
 
 func _ready():
@@ -102,6 +104,7 @@ func _physics_process(_delta):
 	# Ground Velocity
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed
+	global_position.y = 2.0
 
 	# Vertical Velocity
 	#if not is_on_floor(): # If in the air, fall towards the floor. Literally gravity

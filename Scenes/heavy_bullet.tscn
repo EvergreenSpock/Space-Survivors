@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://cku0iphcbwx32"]
+
+[ext_resource type="Script" uid="uid://bcp28mvg27cm1" path="res://Scenes/heavy_bullet.gd" id="1_tt71b"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_y1nk6"]
+size = Vector3(0.4, 0.4, 3.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tt71b"]
+albedo_color = Color(0.937357, 0, 0.137189, 1)
+emission_enabled = true
+emission = Color(0.806422, 0, 0.0870925, 1)
+emission_energy_multiplier = 5.0
+disable_receive_shadows = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imeci"]
+albedo_color = Color(0, 0.552941, 0.701961, 1)
+emission_enabled = true
+emission = Color(0, 0.552941, 0.701961, 1)
+emission_energy_multiplier = 8.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nj43p"]
+emission_shape_scale = Vector3(1, 2, 1)
+direction = Vector3(1, 0, 1)
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+radial_velocity_min = 0.999978
+radial_velocity_max = 5.99998
+
+[sub_resource type="BoxMesh" id="BoxMesh_g56pn"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kfa40"]
+size = Vector3(0.4, 0.4, 4)
+
+[node name="HeavyBullet" type="RigidBody3D"]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_tt71b")
+
+[node name="BulletMesh" type="MeshInstance3D" parent="."]
+gi_mode = 0
+mesh = SubResource("BoxMesh_y1nk6")
+surface_material_override/0 = SubResource("StandardMaterial3D_tt71b")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.78149)
+target_position = Vector3(0, 0, -1.5)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.185701, 0, -0.982606, 0, 1, 0, 0.982606, 0, 0.185701, 0, 0, -0.873206)
+material_override = SubResource("StandardMaterial3D_imeci")
+emitting = false
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_nj43p")
+draw_pass_1 = SubResource("BoxMesh_g56pn")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_kfa40")
