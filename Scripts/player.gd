@@ -34,8 +34,8 @@ var bullet_cooldown_is_ready:bool = true
 # The last movement or aim direction input by the player
 
 func _ready():
-	leftBoostTrail = get_node("Pivot/MicroRecon/LeftEngineBoostTrail")
-	rightBoostTrail = get_node("Pivot/MicroRecon/RightEngineBoostTrail")
+	leftBoostTrail = get_node("Pivot/ShipMesh/LeftEngineBoostTrail")
+	rightBoostTrail = get_node("Pivot/ShipMesh/RightEngineBoostTrail")
 
 func _physics_process(_delta):
 	var direction = Vector3.ZERO

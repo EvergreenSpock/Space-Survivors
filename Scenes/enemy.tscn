@@ -1,13 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgp6fcnhlaaqu"]
+[gd_scene load_steps=7 format=3 uid="uid://cgp6fcnhlaaqu"]
 
 [ext_resource type="Script" uid="uid://dmbuov0xhbfo1" path="res://Scenes/enemy.gd" id="1_afpow"]
 [ext_resource type="ArrayMesh" uid="uid://b873xg7k0ya6j" path="res://Package/Enemy_Warship/WarShip.obj" id="1_hghv2"]
 [ext_resource type="Script" uid="uid://v4kqg6pdjofy" path="res://Scripts/spot_light.gd" id="2_1f0kj"]
+[ext_resource type="Shader" uid="uid://ckmmfw6k54jnn" path="res://Scenes/hit_flash.gdshader" id="2_287tu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1f0kj"]
 margin = 0.1
 radius = 2.1
 height = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0830c"]
+render_priority = 0
+shader = ExtResource("2_287tu")
+shader_parameter/base_color = Color(0.738975, 0, 0.0482122, 1)
+shader_parameter/flash_color = Color(0.593134, 0.593134, 0.593134, 1)
+shader_parameter/intensity = 0.146
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_afpow")
@@ -16,12 +24,14 @@ script = ExtResource("1_afpow")
 transform = Transform3D(2.86603e-15, -6.55671e-08, -1.5, -1.5, -6.55671e-08, 0, -6.55671e-08, 1.5, -6.55671e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_1f0kj")
 
-[node name="WarShip" type="MeshInstance3D" parent="."]
+[node name="ShipMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 layers = 4
+material_override = SubResource("ShaderMaterial_0830c")
+gi_mode = 0
 mesh = ExtResource("1_hghv2")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="WarShip"]
+[node name="SpotLight3D" type="SpotLight3D" parent="ShipMesh"]
 transform = Transform3D(-1, -1.1567e-07, 9.70584e-08, 9.32135e-08, 0.0327895, 0.999462, -1.1879e-07, 0.999462, -0.0327895, 0, 8, -1.07141)
 top_level = true
 light_energy = 6.0
