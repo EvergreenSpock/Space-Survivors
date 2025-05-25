@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgp6fcnhlaaqu"]
+[gd_scene load_steps=9 format=3 uid="uid://cgp6fcnhlaaqu"]
 
 [ext_resource type="Script" uid="uid://dmbuov0xhbfo1" path="res://Scenes/enemy.gd" id="1_afpow"]
 [ext_resource type="ArrayMesh" uid="uid://b873xg7k0ya6j" path="res://Package/Enemy_Warship/WarShip.obj" id="1_hghv2"]
@@ -8,6 +8,47 @@
 margin = 0.1
 radius = 2.1
 height = 8.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_afpow"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_287tu"]
+resource_name = "hit"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material_overlay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_afpow"), null]
+}
+
+[sub_resource type="Animation" id="Animation_0830c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material_overlay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0830c"]
+_data = {
+&"RESET": SubResource("Animation_0830c"),
+&"hit": SubResource("Animation_287tu")
+}
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_afpow")
@@ -32,3 +73,8 @@ distance_fade_length = 1416.71
 spot_range = 13.7104
 spot_angle = 71.8247
 script = ExtResource("2_1f0kj")
+
+[node name="hitflashanim" type="AnimationPlayer" parent="ShipMesh"]
+libraries = {
+&"": SubResource("AnimationLibrary_0830c")
+}

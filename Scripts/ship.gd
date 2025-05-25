@@ -27,7 +27,7 @@ func apply_damage(amount: int) -> void:
 		health = max(health - remaining, 0)
 
 	# Visual feedback always
-	#flash_damage()
+	flash_damage()
 	
 
 	print("Ship took ", amount, " damage! Remaining health: ", health)
@@ -38,7 +38,8 @@ func apply_damage(amount: int) -> void:
 	if health == 0:
 		queue_free()
 
-#func flash_damage():
+func flash_damage():
+	$ShipMesh/hitflashanim.play("hit")
 	#if not mesh:
 		#return
 #
