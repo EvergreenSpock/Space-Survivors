@@ -2,8 +2,8 @@ extends "res://Scripts/ship.gd"
 
 
 # Default stats/settings (could export these and allow them to be changed with upgrades)
-var default_speed := 20
-var boosted_speed := 36
+var default_speed := 14
+var boosted_speed := 28
 var rotation_speed := 8
 var max_fuel = 100
 

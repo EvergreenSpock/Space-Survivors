@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bt2urfpnm2ffx"]
+[gd_scene load_steps=11 format=3 uid="uid://bt2urfpnm2ffx"]
 
 [ext_resource type="PackedScene" uid="uid://c6u5ykn5w58he" path="res://Scenes/player.tscn" id="1_52fb6"]
 [ext_resource type="Texture2D" uid="uid://bejqxhj4aasnp" path="res://Scenes/panorama_image.png" id="2_6l7je"]
 [ext_resource type="PackedScene" uid="uid://7yh2vnfxixgn" path="res://Scenes/Camera.tscn" id="2_jv6wh"]
 [ext_resource type="Script" uid="uid://crwcjkj3lujl7" path="res://Scripts/fuel_meter.gd" id="3_x6ack"]
+[ext_resource type="PackedScene" uid="uid://cgp6fcnhlaaqu" path="res://Scenes/enemy.tscn" id="5_iacmt"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jv6wh"]
 panorama = ExtResource("2_6l7je")
@@ -40,6 +41,7 @@ script = ExtResource("3_x6ack")
 environment = SubResource("Environment_iacmt")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
@@ -61,3 +63,6 @@ shape = SubResource("BoxShape3D_6l7je")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 mesh = SubResource("BoxMesh_6l7je")
 skeleton = NodePath("../CollisionShape3D")
+
+[node name="Enemy" parent="." instance=ExtResource("5_iacmt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.578, 1, -1.464)

@@ -8,7 +8,7 @@ extends SpotLight3D
 var player: Node3D
 
 func _ready():
-	player = get_node("../../..")
+	player = get_node("../..")
 
 func _process(_delta):
 	if not player:
