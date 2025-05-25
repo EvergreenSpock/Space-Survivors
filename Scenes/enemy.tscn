@@ -1,13 +1,29 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgp6fcnhlaaqu"]
+[gd_scene load_steps=10 format=3 uid="uid://cgp6fcnhlaaqu"]
 
 [ext_resource type="Script" uid="uid://dmbuov0xhbfo1" path="res://Scenes/enemy.gd" id="1_afpow"]
 [ext_resource type="ArrayMesh" uid="uid://b873xg7k0ya6j" path="res://Package/Enemy_Warship/WarShip.obj" id="1_hghv2"]
 [ext_resource type="Script" uid="uid://v4kqg6pdjofy" path="res://Scripts/spot_light.gd" id="2_1f0kj"]
+[ext_resource type="PackedScene" uid="uid://2kop233hul0b" path="res://Scenes/pew_pew.tscn" id="4_287tu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1f0kj"]
 margin = 0.1
 radius = 2.1
 height = 8.0
+
+[sub_resource type="Animation" id="Animation_0830c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material_overlay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_afpow"]
 albedo_color = Color(1, 0, 0, 1)
@@ -29,21 +45,6 @@ tracks/0/keys = {
 "values": [SubResource("StandardMaterial3D_afpow"), null]
 }
 
-[sub_resource type="Animation" id="Animation_0830c"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material_overlay")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0830c"]
 _data = {
 &"RESET": SubResource("Animation_0830c"),
@@ -58,7 +59,7 @@ transform = Transform3D(2.86603e-15, -6.55671e-08, -1.5, -1.5, -6.55671e-08, 0, 
 shape = SubResource("CapsuleShape3D_1f0kj")
 
 [node name="ShipMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 0, 0)
 layers = 4
 gi_mode = 0
 mesh = ExtResource("1_hghv2")
@@ -78,3 +79,11 @@ script = ExtResource("2_1f0kj")
 libraries = {
 &"": SubResource("AnimationLibrary_0830c")
 }
+
+[node name="Pew Pew" parent="." instance=ExtResource("4_287tu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5.6564)
+
+[node name="BulletCooldown" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="BulletCooldown" to="." method="_on_bullet_cooldown_timeout"]
