@@ -37,35 +37,35 @@ shape = SubResource("SphereShape3D_cvnsp")
 [node name="Pivot" type="Node3D" parent="."]
 
 [node name="MicroRecon" type="MeshInstance3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, -2, 3.01992e-07, 0, -3.01992e-07, -2, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("1_v0iea")
 skin = SubResource("Skin_vgqql")
 surface_material_override/0 = SubResource("StandardMaterial3D_x3wgy")
 
 [node name="LeftWingLight" type="OmniLight3D" parent="Pivot/MicroRecon"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2016, 0.266279, 0.200357)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.202, 0.2, 0.2)
 light_color = Color(0.721569, 0.0745098, 0, 1)
 light_energy = 0.2
 shadow_enabled = true
 distance_fade_enabled = true
 
 [node name="RightWingLight" type="OmniLight3D" parent="Pivot/MicroRecon"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.266, 0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.20021, 0.2)
 light_color = Color(0.720912, 0.0753834, 9.62615e-08, 1)
 light_energy = 0.2
 shadow_enabled = true
 distance_fade_enabled = true
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Pivot/MicroRecon"]
-transform = Transform3D(-1, -1.15669e-07, 9.70583e-08, 0, 0.642788, 0.766044, -1.50996e-07, 0.766044, -0.642788, 0, 8, -5)
+transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, 0, 8, -0.668154)
 top_level = true
 light_energy = 6.0
 light_volumetric_fog_energy = 4.232
 distance_fade_begin = 950.22
 distance_fade_length = 1416.71
 spot_range = 9.5
-spot_angle = 20.0
+spot_angle = 28.6181
 script = ExtResource("3_6t5aa")
 
 [node name="RightEngineBoostTrail" type="GPUParticles3D" parent="Pivot/MicroRecon"]
