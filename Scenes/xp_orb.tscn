@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://cll7f8v3dpl34"]
+
+[ext_resource type="Script" uid="uid://b0mlfq220h0is" path="res://Scenes/xp_orb.gd" id="1_vmcme"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrexd"]
+albedo_color = Color(1, 1, 0.137255, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vmcme"]
+size = Vector3(1.25, 1.25, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7xup"]
+albedo_color = Color(1, 0.756863, 0.137255, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_s6bd7"]
+size = Vector3(0.75, 0.75, 0.75)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qrexd"]
+size = Vector3(2, 2, 2)
+
+[node name="xp_orb" type="CharacterBody3D"]
+script = ExtResource("1_vmcme")
+
+[node name="InnerBox" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_qrexd")
+transparency = 0.85
+mesh = SubResource("BoxMesh_vmcme")
+
+[node name="OuterBox" type="MeshInstance3D" parent="InnerBox"]
+transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_c7xup")
+mesh = SubResource("BoxMesh_s6bd7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_qrexd")

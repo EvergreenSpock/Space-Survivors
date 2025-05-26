@@ -1,7 +1,8 @@
 extends CharacterBody3D
 
-@export var max_health := 1000
+@export var max_health := 100
 @export var max_shield := 100
+@export var xp_orb_scene: PackedScene
 
 @onready var mesh: Node3D = get_node_or_null("Pivot/ShipMesh") \
 	if get_node_or_null("Pivot/ShipMesh") != null else get_node_or_null("ShipMesh")
@@ -39,7 +40,7 @@ func apply_damage(amount: int) -> void:
 
 	# Now check death
 	if health == 0:
-		queue_free()
+		death()
 
 func flash_damage():
 	hitflashanim.play("hit")
@@ -54,3 +55,11 @@ func flash_damage():
 
 func emit_stats() -> void:
 	stats_changed.emit(health, max_health, shield, max_shield)
+
+func death() -> void:
+	if xp_orb_scene:
+		
+		var orb = xp_orb_scene.instantiate()
+		get_tree().current_scene.add_child(orb)
+		#orb.global_position = global_position
+		queue_free()

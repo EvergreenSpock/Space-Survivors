@@ -3,7 +3,6 @@ extends "res://Scripts/ship.gd"
 @export var desired_distance := 40.0
 @export var distance_tolerance := 3.0
 @export var fire_cooldown := 1.5
-@export var bullet_scene: PackedScene
 @export var speed := 10
 
 @onready var gunBarrel = $"Pew Pew/RayCast3D"
@@ -13,6 +12,8 @@ var bullet = load("res://Scenes/heavy_bullet.tscn")
 var instance
 var bullet_cooldown_is_ready:bool = true
 
+func _ready() -> void:
+	xp_orb_scene = load("res://Scenes/xp_orb.tscn")
 
 func ai_get_direction():
 	var to_player = player.global_position - global_position

@@ -6,6 +6,7 @@ var default_speed := 14
 var boosted_speed := 28
 var rotation_speed := 8
 var max_fuel = 100
+var xp: int = 0
 
 # How fast the player moves in meters per second.
 @export var speed = default_speed
@@ -116,9 +117,15 @@ func _physics_process(_delta):
 	move_and_slide()
 
 
+func _on_xp_collected(amount: int) -> void:
+	xp += amount
+	print("XP collected! New total: ", xp)
+
 func _on_bullet_cooldown_timeout() -> void:
 	bullet_cooldown_is_ready = true; # Replace with function body.
 
 
 func _on_fuel_exhaustion_timeout() -> void:
 	fuel_exhausted = false
+#func death() -> void:
+	#pass
