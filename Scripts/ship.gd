@@ -57,9 +57,4 @@ func emit_stats() -> void:
 	stats_changed.emit(health, max_health, shield, max_shield)
 
 func death() -> void:
-	if xp_orb_scene:
-		
-		var orb = xp_orb_scene.instantiate()
-		get_tree().current_scene.add_child(orb)
-		#orb.global_position = global_position
-		queue_free()
+	health += 100

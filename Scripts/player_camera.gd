@@ -1,9 +1,9 @@
 extends Node3D
 
 @export var player_path: NodePath
-@export var distance: float = -5.0
-@export var height: float = 10.0
-@export var smoothing: float = 1
+@export var distance: float = -7.0
+@export var height: float = 20.0
+@export var smoothing: float = 1.0
 
 var player: Node3D
 
@@ -19,7 +19,7 @@ func _process(_delta):
 	var back_direction = -player.global_transform.basis.z.normalized()
 
 	# Calculate desired camera position behind and above the player
-	var target_position = player_pos + back_direction * distance
+	var target_position = player_pos + back_direction * distance 
 	target_position.y += height
 
 	# Smooth follow
