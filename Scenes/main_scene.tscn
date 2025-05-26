@@ -30,10 +30,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 [node name="PlayerCamera" parent="Player" instance=ExtResource("2_jv6wh")]
 
 [node name="FuelMeterBar" type="ColorRect" parent="Player/PlayerCamera"]
-offset_left = 11.0
-offset_top = 628.0
-offset_right = 111.0
-offset_bottom = 637.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -9.0
+offset_right = 100.0
+grow_vertical = 0
 color = Color(1, 0.854902, 0, 1)
 script = ExtResource("3_x6ack")
 
