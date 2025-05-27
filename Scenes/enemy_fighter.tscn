@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://dcoeeoy8n81t8"]
+
+[ext_resource type="Script" uid="uid://d082qru7nymt" path="res://Scenes/enemy_fighter.gd" id="1_vrqpr"]
+[ext_resource type="ArrayMesh" uid="uid://cqtislimiwf0t" path="res://Package/Enemy_Fighter/InterstellarRunner.obj" id="2_vrqpr"]
+[ext_resource type="Script" uid="uid://v4kqg6pdjofy" path="res://Scripts/spot_light.gd" id="3_2af65"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1f0kj"]
+margin = 0.1
+radius = 2.1
+height = 8.0
+
+[sub_resource type="Animation" id="Animation_0830c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material_overlay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_afpow"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_287tu"]
+resource_name = "hit"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material_overlay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_afpow"), null]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0830c"]
+_data = {
+&"RESET": SubResource("Animation_0830c"),
+&"hit": SubResource("Animation_287tu")
+}
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_vrqpr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2.86603e-15, -6.55671e-08, -1.5, -1.5, -6.55671e-08, -4.23516e-22, -6.55671e-08, 1.5, -6.55671e-08, 0.0106153, 1.6306, -0.55935)
+shape = SubResource("CapsuleShape3D_1f0kj")
+
+[node name="ShipMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 3.42942, 0, -6.58992)
+layers = 4
+gi_mode = 0
+mesh = ExtResource("2_vrqpr")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="ShipMesh"]
+transform = Transform3D(-1, -1.1567e-07, 9.70584e-08, 9.32135e-08, 0.0327895, 0.999462, -1.1879e-07, 0.999462, -0.0327895, 0, 8, -1.07141)
+top_level = true
+light_energy = 6.0
+light_volumetric_fog_energy = 4.232
+distance_fade_begin = 950.22
+distance_fade_length = 1416.71
+spot_range = 13.7104
+spot_angle = 71.8247
+script = ExtResource("3_2af65")
+
+[node name="hitflashanim" type="AnimationPlayer" parent="ShipMesh"]
+libraries = {
+&"": SubResource("AnimationLibrary_0830c")
+}

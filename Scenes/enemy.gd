@@ -14,10 +14,12 @@ var can_fire := true
 	#shader_mat.set_shader_parameter("tex", preload("res://Package/Enemy_Warship/Warship.png"))
 func ai_get_direction():
 	return player.position - self.position
+
 func ai_move():
 	var direction = ai_get_direction()
 	velocity = direction.normalized() * speed
 	move_and_slide()
+	
 func _process(_delta):
 	ai_move()
 	var target_basis = Basis().looking_at(ai_get_direction().normalized(), Vector3.UP)
