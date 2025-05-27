@@ -60,7 +60,6 @@ shape = SubResource("CapsuleShape3D_1f0kj")
 
 [node name="ShipMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 0, 0)
-layers = 4
 gi_mode = 0
 mesh = ExtResource("1_hghv2")
 

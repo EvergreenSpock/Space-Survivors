@@ -6,8 +6,6 @@ extends CharacterBody3D
 
 var player
 
-signal xp_collected(amount: int)
-
 func _ready():
 	player = get_tree().get_current_scene().find_child("Player", true, false)
 

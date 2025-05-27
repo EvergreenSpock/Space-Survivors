@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://crwcjkj3lujl7" path="res://Scripts/fuel_meter.gd" id="3_x6ack"]
 [ext_resource type="PackedScene" uid="uid://cgp6fcnhlaaqu" path="res://Scenes/enemy.tscn" id="5_iacmt"]
 [ext_resource type="PackedScene" uid="uid://cll7f8v3dpl34" path="res://Scenes/xp_orb.tscn" id="7_maf8m"]
+[ext_resource type="Script" uid="uid://b501v7kgpx7xt" path="res://Scenes/enemy_spawner.gd" id="8_huasi"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jv6wh"]
 panorama = ExtResource("2_6l7je")
@@ -24,9 +25,9 @@ size = Vector3(60, 2, 60)
 [sub_resource type="BoxMesh" id="BoxMesh_6l7je"]
 size = Vector3(1000, 1, 1000)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_maf8m"]
-
 [node name="Main Scene" type="Node3D"]
+
+[node name="EnemyContainer" type="Node3D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("1_52fb6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -45,29 +46,32 @@ grow_vertical = 0
 color = Color(1, 0.854902, 0, 1)
 script = ExtResource("3_x6ack")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_iacmt")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Ground" type="StaticBody3D" parent="."]
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="GroundCollision" type="CollisionShape3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+visible = false
 shape = SubResource("BoxShape3D_6l7je")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="GroundMesh" type="MeshInstance3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+visible = false
 mesh = SubResource("BoxMesh_6l7je")
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/MeshInstance3D"]
-transform = Transform3D(12.5699, 0, 0, 0, 25.3539, 0, 0, 0, 10.9565, -165.177, 2.69128, 0)
-cast_shadow = 0
-gi_mode = 0
-mesh = SubResource("CylinderMesh_maf8m")
+skeleton = NodePath("../GroundCollision")
 
 [node name="Enemy" parent="." instance=ExtResource("5_iacmt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.578, 1, -1.464)
 
 [node name="xp_orb" parent="." instance=ExtResource("7_maf8m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.55674, -1.01817, -16.503)
+
+[node name="EnemySpawner" type="Node3D" parent="."]
+transform = Transform3D(12.5699, 0, 0, 0, 25.3539, 0, 0, 0, 10.9565, -1000, 2, 1000)
+script = ExtResource("8_huasi")
+enemy_scene = ExtResource("5_iacmt")

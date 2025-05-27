@@ -34,7 +34,7 @@ func apply_damage(amount: int) -> void:
 	flash_damage()
 	
 
-	print("Ship took ", amount, " damage! Remaining health: ", health)
+	#print("Ship took ", amount, " damage! Remaining health: ", health)
 
 	emit_stats()
 

@@ -1,12 +1,13 @@
 extends "res://Scripts/ship.gd"
 
-@export var desired_distance := 25.0
-@export var distance_tolerance := 1.0
+@export var desired_distance := 20.0
+@export var distance_tolerance := 5.0
+@export var max_distance := 35.0
 #@export var fire_cooldown := 0
-@export var speed := 15
+@export var speed := 30
 
 @onready var gunBarrel = $"Pew Pew/RayCast3D"
-@onready var player := get_node("../Player")
+@onready var player := get_tree().get_root().get_node("Main Scene/Player")
 var can_fire := true
 var bullet = load("res://Scenes/heavy_bullet.tscn")
 var instance
@@ -14,6 +15,7 @@ var bullet_cooldown_is_ready:bool = true
 
 func _ready() -> void:
 	xp_orb_scene = preload("res://Scenes/xp_orb.tscn")
+	print("Enemy ready at: ", global_position)
 
 func ai_get_direction():
 	var to_player = player.global_position - global_position
@@ -21,14 +23,16 @@ func ai_get_direction():
 
 	if distance < desired_distance - distance_tolerance:
 		can_fire = false
-		return -to_player
-	elif distance > desired_distance + distance_tolerance:
+		return -to_player  # Too close → retreat
+	elif distance <= desired_distance + distance_tolerance:
 		can_fire = true
-		return to_player
+		return Vector3.ZERO  # In sweet spot → hold position
+	elif distance <= max_distance:
+		can_fire = true
+		return to_player  # Within range → approach
 	else:
-		can_fire = true
-		# In sweet spot — stay still
-		return Vector3.ZERO
+		can_fire = false
+		return to_player  # Too far → pursue aggressively
 
 func ai_move():
 	var direction = ai_get_direction()

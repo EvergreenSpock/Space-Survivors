@@ -79,6 +79,7 @@ shape = SubResource("SphereShape3D_cvnsp")
 
 [node name="ShipMesh" type="MeshInstance3D" parent="Pivot"]
 transform = Transform3D(2, 0, 0, 0, -2, 3.01992e-07, 0, -3.01992e-07, -2, 0, 0, 0)
+layers = 9
 cast_shadow = 0
 mesh = ExtResource("1_v0iea")
 skin = SubResource("Skin_vgqql")
