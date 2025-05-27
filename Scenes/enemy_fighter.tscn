@@ -78,3 +78,5 @@ script = ExtResource("3_2af65")
 libraries = {
 &"": SubResource("AnimationLibrary_0830c")
 }
+
+[node name="StrafeTimer" type="Timer" parent="."]
