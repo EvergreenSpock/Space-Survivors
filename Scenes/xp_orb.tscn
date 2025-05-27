@@ -3,12 +3,15 @@
 [ext_resource type="Script" uid="uid://b0mlfq220h0is" path="res://Scripts/xp_orb.gd" id="1_vmcme"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrexd"]
+shading_mode = 0
+disable_ambient_light = true
 albedo_color = Color(1, 1, 0.137255, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_vmcme"]
 size = Vector3(1.25, 1.25, 1.25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7xup"]
+shading_mode = 0
 albedo_color = Color(1, 0.756863, 0.137255, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_s6bd7"]
@@ -18,12 +21,15 @@ size = Vector3(0.75, 0.75, 0.75)
 size = Vector3(2, 2, 2)
 
 [node name="xp_orb" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_vmcme")
 
 [node name="InnerBox" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 material_override = SubResource("StandardMaterial3D_qrexd")
 transparency = 0.85
+gi_mode = 0
 mesh = SubResource("BoxMesh_vmcme")
 
 [node name="OuterBox" type="MeshInstance3D" parent="InnerBox"]

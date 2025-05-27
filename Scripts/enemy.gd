@@ -13,7 +13,7 @@ var instance
 var bullet_cooldown_is_ready:bool = true
 
 func _ready() -> void:
-	xp_orb_scene = load("res://Scenes/xp_orb.tscn")
+	xp_orb_scene = preload("res://Scenes/xp_orb.tscn")
 
 func ai_get_direction():
 	var to_player = player.global_position - global_position
@@ -77,8 +77,9 @@ func face_player(turn_speed := 3.0, delta := 1.0) -> void:
 	global_transform.basis = global_transform.basis.slerp(target_basis, turn_speed * delta)
 	
 func death() -> void:
-	if xp_orb_scene:
-		var orb = xp_orb_scene.instantiate()
-		get_tree().current_scene.add_child(orb)
-		#orb.global_position = global_position
-		queue_free()
+	
+	var orb = xp_orb_scene.instantiate()
+	get_tree().get_root().add_child(orb)
+	orb.global_position = global_position
+	Global.player_score += 25
+	queue_free()

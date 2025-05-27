@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://1vgdwg5khlid"]
+[gd_scene load_steps=4 format=3 uid="uid://1vgdwg5khlid"]
 
 [ext_resource type="Script" uid="uid://biccclhr65g2j" path="res://Scripts/level.gd" id="1_5x6se"]
 [ext_resource type="Script" uid="uid://co7e3l7taxgi2" path="res://Scenes/exp.gd" id="2_ey7ub"]
+[ext_resource type="Script" uid="uid://dcdh8vfca210k" path="res://Scenes/score.gd" id="3_gtfj6"]
 
 [node name="InGameUI" type="Control"]
 layout_mode = 3
@@ -39,3 +40,11 @@ offset_bottom = -747.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("2_ey7ub")
+
+[node name="score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 70.0
+offset_right = 80.0
+offset_bottom = 100.0
+script = ExtResource("3_gtfj6")
