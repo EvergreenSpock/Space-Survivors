@@ -57,4 +57,4 @@ func emit_stats() -> void:
 	stats_changed.emit(health, max_health, shield, max_shield)
 
 func death() -> void:
-	health += 100
+	queue_free()

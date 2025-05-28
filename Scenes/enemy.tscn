@@ -51,7 +51,7 @@ _data = {
 &"hit": SubResource("Animation_287tu")
 }
 
-[node name="Enemy" type="CharacterBody3D"]
+[node name="Enemy" type="CharacterBody3D" groups=["Enemy"]]
 script = ExtResource("1_afpow")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -80,7 +80,7 @@ libraries = {
 }
 
 [node name="Pew Pew" parent="." instance=ExtResource("4_287tu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5.6564)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.349429, -5.91935)
 
 [node name="BulletCooldown" type="Timer" parent="."]
 one_shot = true

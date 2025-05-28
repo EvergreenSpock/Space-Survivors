@@ -8,20 +8,22 @@ extends Node3D
 var spawn_timer := 1.0
 var current_enemies: Array = []
 
-@onready var player := get_tree().get_root().get_node("Main Scene/Player")
-
-
-
+@onready var player := get_tree().get_root().get_node_or_null("Main Scene/Player")
 
 func _process(delta: float) -> void:
+	# Update player reference in case it was freed and respawned
+	if not is_instance_valid(player):
+		player = get_tree().get_root().get_node_or_null("Main Scene/Player")
+
+	if not is_instance_valid(player):
+		return  # Player doesn't exist yet — don't spawn anything
+
 	spawn_timer += delta
 
-	# Periodically spawn if limit not reached
 	if spawn_timer >= spawn_interval and current_enemies.size() < max_enemies:
 		spawn_timer = 0.0
 		spawn_enemy()
 
-	# Clean up nulls
 	current_enemies = current_enemies.filter(func(e): return is_instance_valid(e))
 
 func spawn_enemy():
@@ -42,7 +44,7 @@ func spawn_enemy():
 	)
 
 	var spawn_position = player.global_position + offset
-	enemy.global_position = spawn_position  # 🔄 Move this before add_child!
+	enemy.global_position = spawn_position
 
 	var enemy_container = get_tree().get_current_scene().get_node("EnemyContainer")
 	if not enemy_container:
@@ -51,6 +53,5 @@ func spawn_enemy():
 
 	enemy_container.add_child(enemy)
 	current_enemies.append(enemy)
-	
 
 	print("Enemy initial position (pre-add): ", spawn_position)

@@ -39,10 +39,10 @@ var can_fire := true
 func _ready():
 	leftBoostTrail = get_node("Pivot/ShipMesh/LeftEngineBoostTrail")
 	rightBoostTrail = get_node("Pivot/ShipMesh/RightEngineBoostTrail")
+	$PlayerCamera/InGameUI/Retry.hide()
 
 func _physics_process(_delta):
 	var direction = Vector3.ZERO
-
 	if Input.is_action_pressed("move_right"):
 		direction.x += 1
 	if Input.is_action_pressed("move_left"):
@@ -84,6 +84,10 @@ func _physics_process(_delta):
 		
 		$FuelExhaustion.start()
 		
+	elif Input.is_action_pressed("interact") and $PlayerCamera/InGameUI/Retry.visible:
+		queue_free()
+		get_tree().reload_current_scene()
+		
 	else: # could probably do this better and not have run every update frame
 		speed = default_speed
 		
@@ -122,10 +126,15 @@ func _physics_process(_delta):
 	#print("XP collected! New total: ", xp)
 
 func _on_bullet_cooldown_timeout() -> void:
-	bullet_cooldown_is_ready = true; # Replace with function body.
+	if can_fire:
+		bullet_cooldown_is_ready = true; # Replace with function body.
 
 
 func _on_fuel_exhaustion_timeout() -> void:
 	fuel_exhausted = false
-#func death() -> void:
-	#pass
+func death() -> void:
+	can_fire = false
+	$PlayerCamera/InGameUI/Retry.show()
+	$".".hide()
+	#await get_tree().create_timer(1).timeout
+	#queue_free()

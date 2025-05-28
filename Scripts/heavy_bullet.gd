@@ -20,7 +20,7 @@ func _process(delta):
 		collider.apply_damage(damage)
 		particles.emitting = true
 		mesh.visible = false
-		await get_tree().create_timer(0.5).timeout
+		#await get_tree().create_timer(0.5).timeout
 		queue_free()
 
 

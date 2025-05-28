@@ -11,6 +11,7 @@ func _ready():
 
 func _physics_process(delta):
 	if not is_instance_valid(player):
+		queue_free()
 		return
 
 	var distance = global_position.distance_to(player.global_position)

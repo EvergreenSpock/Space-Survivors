@@ -3,36 +3,39 @@ extends "res://Scripts/ship.gd"
 @export var desired_distance := 20.0
 @export var distance_tolerance := 5.0
 @export var max_distance := 35.0
-#@export var fire_cooldown := 0
 @export var speed := 30
 
 @onready var gunBarrel = $"Pew Pew/RayCast3D"
-@onready var player := get_tree().get_root().get_node("Main Scene/Player")
+@onready var player = get_tree().get_root().get_node_or_null("Main Scene/Player")
 var can_fire := true
 var bullet = load("res://Scenes/heavy_bullet.tscn")
 var instance
-var bullet_cooldown_is_ready:bool = true
+var bullet_cooldown_is_ready: bool = true
 
 func _ready() -> void:
 	xp_orb_scene = preload("res://Scenes/xp_orb.tscn")
 	print("Enemy ready at: ", global_position)
 
 func ai_get_direction():
+	if not is_instance_valid(player):
+		can_fire = false
+		return Vector3.ZERO
+
 	var to_player = player.global_position - global_position
 	var distance = to_player.length()
 
 	if distance < desired_distance - distance_tolerance:
 		can_fire = false
-		return -to_player  # Too close → retreat
+		return -to_player
 	elif distance <= desired_distance + distance_tolerance:
 		can_fire = true
-		return Vector3.ZERO  # In sweet spot → hold position
+		return Vector3.ZERO
 	elif distance <= max_distance:
 		can_fire = true
-		return to_player  # Within range → approach
+		return to_player
 	else:
 		can_fire = false
-		return to_player  # Too far → pursue aggressively
+		return to_player
 
 func ai_move():
 	var direction = ai_get_direction()
@@ -43,15 +46,21 @@ func ai_move():
 		velocity = Vector3.ZERO
 
 func _process(delta):
+	if not is_instance_valid(player):
+		return  # Player is gone — skip processing
+
 	ai_move()
+
 	if !is_facing_player() and can_fire:
 		face_player(3.0, delta)
+
 	var direction = ai_get_direction()
 	if direction != Vector3.ZERO:
 		var target_basis = Basis.looking_at(direction.normalized(), Vector3.UP)
-		global_transform.basis = global_transform.basis.slerp(target_basis, 3 * get_process_delta_time())
-		global_position.y = 2.0
-	
+		global_transform.basis = global_transform.basis.slerp(target_basis, 3 * delta)
+
+	global_position.y = 2.0
+
 	if bullet_cooldown_is_ready and can_fire and is_facing_player():
 		bullet_cooldown_is_ready = false
 		$BulletCooldown.start()
@@ -61,7 +70,7 @@ func _process(delta):
 		get_tree().current_scene.add_child(instance)
 
 func _on_bullet_cooldown_timeout() -> void:
-	bullet_cooldown_is_ready = true; # Replace with function body.
+	bullet_cooldown_is_ready = true
 
 func is_facing_player(threshold: float = 1.0) -> bool:
 	if not is_instance_valid(player):
@@ -72,6 +81,7 @@ func is_facing_player(threshold: float = 1.0) -> bool:
 	var alignment = forward.dot(to_player)
 
 	return alignment >= threshold
+
 func face_player(turn_speed := 3.0, delta := 1.0) -> void:
 	if not is_instance_valid(player):
 		return
@@ -79,9 +89,8 @@ func face_player(turn_speed := 3.0, delta := 1.0) -> void:
 	var to_player = (player.global_position - global_position).normalized()
 	var target_basis = Basis.looking_at(to_player, Vector3.UP)
 	global_transform.basis = global_transform.basis.slerp(target_basis, turn_speed * delta)
-	
+
 func death() -> void:
-	
 	var orb = xp_orb_scene.instantiate()
 	get_tree().get_root().add_child(orb)
 	orb.global_position = global_position
