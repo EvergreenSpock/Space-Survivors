@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cw7520v2qhugp" path="res://Scenes/reward_cards.gd" id="1_esjl1"]
 
 [node name="RewardScreen" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,7 +60,7 @@ offset_left = 5.0
 offset_top = 290.0
 offset_right = 395.0
 offset_bottom = 590.0
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 25
 text = "Test"
 horizontal_alignment = 1
 
@@ -96,7 +97,7 @@ offset_left = 5.0
 offset_top = 290.0
 offset_right = 395.0
 offset_bottom = 590.0
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 25
 text = "Test"
 horizontal_alignment = 1
 
@@ -123,6 +124,7 @@ offset_right = 309.0
 offset_bottom = 287.0
 theme_override_font_sizes/font_size = 25
 text = "Title"
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="WeaponDescription" type="Label" parent="RewardCards/RightCard"]
@@ -131,8 +133,11 @@ offset_left = 5.0
 offset_top = 290.0
 offset_right = 395.0
 offset_bottom = 590.0
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 25
 text = "Test"
 horizontal_alignment = 1
 
 [connection signal="visibility_changed" from="." to="RewardCards" method="_on_reward_screen_visibility_changed"]
+[connection signal="pressed" from="RewardCards/LeftCard/LeftCardSelect" to="RewardCards" method="_on_left_card_select_pressed"]
+[connection signal="pressed" from="RewardCards/MiddleCard/MiddleCardSelect" to="RewardCards" method="_on_middle_card_select_pressed"]
+[connection signal="pressed" from="RewardCards/RightCard/RightCardSelect" to="RewardCards" method="_on_right_card_select_pressed"]

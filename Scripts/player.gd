@@ -6,7 +6,6 @@ var default_speed := 14
 var boosted_speed := 28
 var rotation_speed := 8
 var max_fuel = 100
-#var xp: int = 0
 
 # How fast the player moves in meters per second.
 @export var speed = default_speed
@@ -40,8 +39,9 @@ func _ready():
 	leftBoostTrail = get_node("Pivot/ShipMesh/LeftEngineBoostTrail")
 	rightBoostTrail = get_node("Pivot/ShipMesh/RightEngineBoostTrail")
 	$PlayerCamera/InGameUI/Retry.hide()
-	max_health = 10000
-	health = 10000
+	max_health = 150 + Global.max_health_upgrade
+	health = 150
+	shield = 75
 
 func _physics_process(_delta):
 	look_at_cursor()
@@ -54,7 +54,6 @@ func _physics_process(_delta):
 		direction.z += 1
 	if Input.is_action_pressed("move_forward"):
 		direction.z -= 1
-	#if Input.is_action_just_pressed("pew_pew_button"):
 	if bullet_cooldown_is_ready:
 		bullet_cooldown_is_ready = false
 		$BulletCooldown.start()
@@ -100,35 +99,15 @@ func _physics_process(_delta):
 		if fuel_level < max_fuel:
 			fuel_level += 1
 
-
-	#if direction != Vector3.ZERO:
-		#direction = direction.normalized()
-		#var current_basis = $Pivot.global_transform.basis
-		#var target_basis = Basis.looking_at(direction, Vector3.UP)
-		#$Pivot.global_transform.basis = current_basis.slerp(target_basis, rotation_speed * _delta)
-
-
-
 	# Ground Velocity
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed
 	global_position.y = 2.0
 
-	# Vertical Velocity
-	#if not is_on_floor(): # If in the air, fall towards the floor. Literally gravity
-		#target_velocity.y = target_velocity.y
-
 	# Moving the Character
 	# Smoothly interpolate current velocity toward target
 	velocity = velocity.lerp(target_velocity, .5)
 	move_and_slide()
-
-
-#func _on_xp_collected(amount: int) -> void:
-	#xp += amount
-	#print("XP collected! New total: ", xp)
-#func _process(_delta):
-	#look_at_cursor()
 
 func _on_bullet_cooldown_timeout() -> void:
 	if can_fire:
