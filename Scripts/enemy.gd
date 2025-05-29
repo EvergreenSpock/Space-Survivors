@@ -2,7 +2,7 @@ extends "res://Scripts/ship.gd"
 
 @export var desired_distance := 20.0
 @export var distance_tolerance := 5.0
-@export var max_distance := 35.0
+@export var max_distance := 40.0
 @export var speed := 30
 
 @onready var gunBarrel = $"Pew Pew/RayCast3D"
