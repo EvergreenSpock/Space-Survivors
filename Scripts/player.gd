@@ -40,8 +40,11 @@ func _ready():
 	leftBoostTrail = get_node("Pivot/ShipMesh/LeftEngineBoostTrail")
 	rightBoostTrail = get_node("Pivot/ShipMesh/RightEngineBoostTrail")
 	$PlayerCamera/InGameUI/Retry.hide()
+	max_health = 10000
+	health = 10000
 
 func _physics_process(_delta):
+	look_at_cursor()
 	var direction = Vector3.ZERO
 	if Input.is_action_pressed("move_right"):
 		direction.x += 1
@@ -98,11 +101,11 @@ func _physics_process(_delta):
 			fuel_level += 1
 
 
-	if direction != Vector3.ZERO:
-		direction = direction.normalized()
-		var current_basis = $Pivot.global_transform.basis
-		var target_basis = Basis.looking_at(direction, Vector3.UP)
-		$Pivot.global_transform.basis = current_basis.slerp(target_basis, rotation_speed * _delta)
+	#if direction != Vector3.ZERO:
+		#direction = direction.normalized()
+		#var current_basis = $Pivot.global_transform.basis
+		#var target_basis = Basis.looking_at(direction, Vector3.UP)
+		#$Pivot.global_transform.basis = current_basis.slerp(target_basis, rotation_speed * _delta)
 
 
 
@@ -117,13 +120,15 @@ func _physics_process(_delta):
 
 	# Moving the Character
 	# Smoothly interpolate current velocity toward target
-	velocity = velocity.lerp(target_velocity, 0.1)
+	velocity = velocity.lerp(target_velocity, .5)
 	move_and_slide()
 
 
 #func _on_xp_collected(amount: int) -> void:
 	#xp += amount
 	#print("XP collected! New total: ", xp)
+#func _process(_delta):
+	#look_at_cursor()
 
 func _on_bullet_cooldown_timeout() -> void:
 	if can_fire:
@@ -138,3 +143,41 @@ func death() -> void:
 	$".".hide()
 	#await get_tree().create_timer(1).timeout
 	#queue_free()
+func look_at_cursor():
+	var raycast_length = 1000
+	var viewport := $PlayerCamera/SubViewportContainer/SubViewport
+	var camera := viewport.get_node("PlayerCamera")  # Adjust path if necessary
+
+	var mouse_position = viewport.get_mouse_position()  # LOCAL to the SubViewport
+	var ray_origin = camera.project_ray_origin(mouse_position)
+	var ray_direction = camera.project_ray_normal(mouse_position)
+	var ray_to = ray_origin + ray_direction * raycast_length
+	
+	# Perform physics raycast
+	var space_state = get_world_3d().get_direct_space_state()
+	var params = PhysicsRayQueryParameters3D.new()
+	params.from = ray_origin
+	params.to = ray_to
+	params.collision_mask = 1  # Make sure this matches the target layer
+	var result = space_state.intersect_ray(params)
+	
+	var target_position: Vector3
+
+	if result:
+		target_position = result.position
+		if has_node("mouse_select"):
+			$mouse_select.global_transform.origin = result.position
+	else:
+		# Fallback to horizontal plane
+		var plane_y = global_position.y
+		var plane = Plane(Vector3.UP, plane_y)
+		var hit = plane.intersects_ray(ray_origin, ray_to)
+		if hit == null:
+			return
+		target_position = hit
+
+	# Rotate the pivot to face the target position
+	# Force target position to match pivot Y level
+	target_position.y = $Pivot.global_position.y
+	# Now look only in the horizontal plane
+	$Pivot.look_at(target_position, Vector3.UP)

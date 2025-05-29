@@ -1,9 +1,10 @@
 extends ProgressBar
 
-
+@onready var reward_screen = get_tree().get_root().get_node_or_null("Main Scene/Player/PlayerCamera/RewardScreen")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	update_exp_bar()
+	reward_screen.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,3 +27,5 @@ func check_level_up():
 	while Global.player_exp >= Global.exp_threshold[Global.player_level]:
 		Global.player_exp -= Global.exp_threshold[Global.player_level]
 		Global.player_level += 1 
+		get_tree().paused = true
+		reward_screen.show()

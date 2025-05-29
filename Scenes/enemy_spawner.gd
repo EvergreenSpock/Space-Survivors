@@ -36,7 +36,6 @@ func spawn_enemy():
 		return
 
 	var enemy = enemy_scene.instantiate()
-
 	var offset = Vector3(
 		randf_range(-spawn_radius, spawn_radius),
 		2.0,
@@ -53,5 +52,5 @@ func spawn_enemy():
 
 	enemy_container.add_child(enemy)
 	current_enemies.append(enemy)
-
+	#enemy.global_position = spawn_position
 	print("Enemy initial position (pre-add): ", spawn_position)

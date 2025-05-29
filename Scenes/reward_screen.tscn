@@ -1,0 +1,138 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuaunexgikqy"]
+
+[ext_resource type="Script" uid="uid://cw7520v2qhugp" path="res://Scenes/reward_cards.gd" id="1_esjl1"]
+
+[node name="RewardScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RewardCards" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_esjl1")
+
+[node name="TransparentBackground" type="ColorRect" parent="RewardCards"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.427493, 0.427493, 0.427493, 0.337255)
+
+[node name="LeftCard" type="ColorRect" parent="RewardCards"]
+custom_minimum_size = Vector2(400, 600)
+layout_direction = 2
+layout_mode = 0
+offset_left = 150.0
+offset_top = 150.0
+offset_right = 550.0
+offset_bottom = 750.0
+color = Color(0.273873, 0.273873, 0.273873, 1)
+
+[node name="LeftCardSelect" type="Button" parent="RewardCards/LeftCard"]
+custom_minimum_size = Vector2(400, 600)
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 600.0
+
+[node name="WeaponTitle" type="Label" parent="RewardCards/LeftCard"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 0
+offset_left = 100.0
+offset_top = 150.0
+offset_right = 300.0
+offset_bottom = 250.0
+theme_override_font_sizes/font_size = 25
+text = "Title"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="WeaponDescription" type="Label" parent="RewardCards/LeftCard"]
+custom_minimum_size = Vector2(390, 300)
+offset_left = 5.0
+offset_top = 290.0
+offset_right = 395.0
+offset_bottom = 590.0
+theme_override_font_sizes/font_size = 100
+text = "Test"
+horizontal_alignment = 1
+
+[node name="MiddleCard" type="ColorRect" parent="RewardCards"]
+custom_minimum_size = Vector2(400, 600)
+layout_direction = 2
+layout_mode = 0
+offset_left = 700.0
+offset_top = 150.0
+offset_right = 1100.0
+offset_bottom = 750.0
+color = Color(0.273873, 0.273873, 0.273873, 1)
+
+[node name="MiddleCardSelect" type="Button" parent="RewardCards/MiddleCard"]
+custom_minimum_size = Vector2(400, 600)
+offset_right = 400.0
+offset_bottom = 600.0
+
+[node name="WeaponTitle" type="Label" parent="RewardCards/MiddleCard"]
+custom_minimum_size = Vector2(200, 100)
+offset_left = 100.0
+offset_top = 150.0
+offset_right = 300.0
+offset_bottom = 250.0
+theme_override_font_sizes/font_size = 25
+text = "Title"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="WeaponDescription" type="Label" parent="RewardCards/MiddleCard"]
+custom_minimum_size = Vector2(390, 300)
+layout_mode = 0
+offset_left = 5.0
+offset_top = 290.0
+offset_right = 395.0
+offset_bottom = 590.0
+theme_override_font_sizes/font_size = 100
+text = "Test"
+horizontal_alignment = 1
+
+[node name="RightCard" type="ColorRect" parent="RewardCards"]
+custom_minimum_size = Vector2(400, 600)
+layout_direction = 2
+layout_mode = 0
+offset_left = 1250.0
+offset_top = 150.0
+offset_right = 1650.0
+offset_bottom = 750.0
+color = Color(0.273873, 0.273873, 0.273873, 1)
+
+[node name="RightCardSelect" type="Button" parent="RewardCards/RightCard"]
+custom_minimum_size = Vector2(400, 600)
+offset_right = 400.0
+offset_bottom = 600.0
+
+[node name="WeaponTitle" type="Label" parent="RewardCards/RightCard"]
+custom_minimum_size = Vector2(200, 100)
+offset_left = 100.0
+offset_top = 150.0
+offset_right = 309.0
+offset_bottom = 287.0
+theme_override_font_sizes/font_size = 25
+text = "Title"
+autowrap_mode = 3
+
+[node name="WeaponDescription" type="Label" parent="RewardCards/RightCard"]
+custom_minimum_size = Vector2(390, 300)
+offset_left = 5.0
+offset_top = 290.0
+offset_right = 395.0
+offset_bottom = 590.0
+theme_override_font_sizes/font_size = 100
+text = "Test"
+horizontal_alignment = 1
+
+[connection signal="visibility_changed" from="." to="RewardCards" method="_on_reward_screen_visibility_changed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bt2urfpnm2ffx"]
+[gd_scene load_steps=15 format=3 uid="uid://bt2urfpnm2ffx"]
 
 [ext_resource type="PackedScene" uid="uid://c6u5ykn5w58he" path="res://Scenes/player.tscn" id="1_52fb6"]
 [ext_resource type="Texture2D" uid="uid://bejqxhj4aasnp" path="res://Scenes/panorama_image.png" id="2_6l7je"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://1vgdwg5khlid" path="res://Scenes/in_game_ui.tscn" id="3_6ev3c"]
 [ext_resource type="Script" uid="uid://crwcjkj3lujl7" path="res://Scripts/fuel_meter.gd" id="3_x6ack"]
 [ext_resource type="PackedScene" uid="uid://cgp6fcnhlaaqu" path="res://Scenes/enemy.tscn" id="5_iacmt"]
+[ext_resource type="PackedScene" uid="uid://cuaunexgikqy" path="res://Scenes/reward_screen.tscn" id="5_m1efj"]
 [ext_resource type="PackedScene" uid="uid://cll7f8v3dpl34" path="res://Scenes/xp_orb.tscn" id="7_maf8m"]
 [ext_resource type="Script" uid="uid://b501v7kgpx7xt" path="res://Scenes/enemy_spawner.gd" id="8_huasi"]
 
@@ -45,6 +46,8 @@ offset_right = 100.0
 grow_vertical = 0
 color = Color(1, 0.854902, 0, 1)
 script = ExtResource("3_x6ack")
+
+[node name="RewardScreen" parent="Player/PlayerCamera" instance=ExtResource("5_m1efj")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
 
