@@ -10,8 +10,8 @@ extends CharacterBody3D
 @onready var hitflashanim: AnimationPlayer = get_node_or_null("Pivot/ShipMesh/hitflashanim") \
 	if get_node_or_null("Pivot/ShipMesh/hitflashanim") != null else get_node_or_null("ShipMesh/hitflashanim")
 
-var health := max_health
-var shield := max_shield
+@export var health := max_health
+@export var shield := max_shield
 
 signal stats_changed(current_health: int, max_health: int, current_shield: int, max_shield: int)
 

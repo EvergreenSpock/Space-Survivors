@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddsy61x2i4153"]
+
+[ext_resource type="Texture2D" uid="uid://dg3nn16o1g2gn" path="res://bars/HP Bar.png" id="1_25q3q"]
+[ext_resource type="Texture2D" uid="uid://cihxboleilr3t" path="res://bars/HP Border.png" id="2_2s5sm"]
+
+[node name="HealthBar" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 4.0
+grow_horizontal = 2
+
+[node name="HpBar" type="Sprite2D" parent="."]
+position = Vector2(0, 65)
+scale = Vector2(10, 10)
+texture = ExtResource("1_25q3q")
+
+[node name="HpBorder" type="Sprite2D" parent="."]
+position = Vector2(0, 65)
+scale = Vector2(10, 10)
+texture = ExtResource("2_2s5sm")

@@ -33,13 +33,15 @@ var can_fire := true
 @onready var gunBarrel = $"Pivot/Pew Pew/RayCast3D"
 @onready var gunBarrel2 = $"Pivot/Pew Pew 2/RayCast3D"
 
+signal health_depleted(max_health, remaining)
+
 # The last movement or aim direction input by the player
 
 func _ready():
 	leftBoostTrail = get_node("Pivot/ShipMesh/LeftEngineBoostTrail")
 	rightBoostTrail = get_node("Pivot/ShipMesh/RightEngineBoostTrail")
 	$PlayerCamera/InGameUI/Retry.hide()
-	max_health = 150 + Global.max_health_upgrade
+	max_health = 150 #+ Global.max_health_upgrade
 	health = 150
 	shield = 75
 
@@ -122,6 +124,27 @@ func death() -> void:
 	$".".hide()
 	#await get_tree().create_timer(1).timeout
 	#queue_free()
+	
+func apply_damage(amount: int) -> void:
+	var remaining := amount
+	health_depleted.emit(max_health, remaining)
+	# Shields absorb first
+	if shield > 0: 
+		remaining = max(0, amount - shield)
+		shield = max(shield - amount, 0)
+
+	# Health takes remaining
+	if remaining > 0:
+		health = max(health - remaining, 0)
+	
+	# Visual feedback always
+	flash_damage()
+	print("Ship took ", amount, " damage! Remaining health: ", health)
+	emit_stats()
+		# Now check death
+	if health == 0:
+		death()
+	
 func look_at_cursor():
 	var raycast_length = 1000
 	var viewport := $PlayerCamera/SubViewportContainer/SubViewport

@@ -53,4 +53,4 @@ func spawn_enemy():
 	enemy_container.add_child(enemy)
 	current_enemies.append(enemy)
 	#enemy.global_position = spawn_position
-	print("Enemy initial position (pre-add): ", spawn_position)
+	#print("Enemy initial position (pre-add): ", spawn_position)

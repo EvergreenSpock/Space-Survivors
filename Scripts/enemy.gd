@@ -14,7 +14,7 @@ var bullet_cooldown_is_ready: bool = true
 
 func _ready() -> void:
 	xp_orb_scene = preload("res://Scenes/xp_orb.tscn")
-	print("Enemy ready at: ", global_position)
+	#print("Enemy ready at: ", global_position)
 
 func ai_get_direction():
 	if not is_instance_valid(player):

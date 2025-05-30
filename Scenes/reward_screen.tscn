@@ -56,6 +56,7 @@ autowrap_mode = 3
 
 [node name="WeaponDescription" type="Label" parent="RewardCards/LeftCard"]
 custom_minimum_size = Vector2(390, 300)
+layout_mode = 0
 offset_left = 5.0
 offset_top = 290.0
 offset_right = 395.0
@@ -76,11 +77,13 @@ color = Color(0.273873, 0.273873, 0.273873, 1)
 
 [node name="MiddleCardSelect" type="Button" parent="RewardCards/MiddleCard"]
 custom_minimum_size = Vector2(400, 600)
+layout_mode = 0
 offset_right = 400.0
 offset_bottom = 600.0
 
 [node name="WeaponTitle" type="Label" parent="RewardCards/MiddleCard"]
 custom_minimum_size = Vector2(200, 100)
+layout_mode = 0
 offset_left = 100.0
 offset_top = 150.0
 offset_right = 300.0
@@ -113,11 +116,13 @@ color = Color(0.273873, 0.273873, 0.273873, 1)
 
 [node name="RightCardSelect" type="Button" parent="RewardCards/RightCard"]
 custom_minimum_size = Vector2(400, 600)
+layout_mode = 0
 offset_right = 400.0
 offset_bottom = 600.0
 
 [node name="WeaponTitle" type="Label" parent="RewardCards/RightCard"]
 custom_minimum_size = Vector2(200, 100)
+layout_mode = 0
 offset_left = 100.0
 offset_top = 150.0
 offset_right = 309.0
@@ -129,6 +134,7 @@ autowrap_mode = 3
 
 [node name="WeaponDescription" type="Label" parent="RewardCards/RightCard"]
 custom_minimum_size = Vector2(390, 300)
+layout_mode = 0
 offset_left = 5.0
 offset_top = 290.0
 offset_right = 395.0
