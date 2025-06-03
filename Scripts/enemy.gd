@@ -7,10 +7,13 @@ extends "res://Scripts/ship.gd"
 
 @onready var gunBarrel = $"Pew Pew/RayCast3D"
 @onready var player = get_tree().get_root().get_node_or_null("Main Scene/Player")
+@onready var dating_sim_scene = get_tree().get_root().get_node_or_null("Main Scene/Player/DatingSim")
 var can_fire := true
 var bullet = load("res://Scenes/heavy_bullet.tscn")
 var instance
 var bullet_cooldown_is_ready: bool = true
+
+
 
 func _ready() -> void:
 	xp_orb_scene = preload("res://Scenes/xp_orb.tscn")
@@ -96,3 +99,33 @@ func death() -> void:
 	orb.global_position = global_position
 	Global.player_score += 25
 	queue_free()
+	
+func apply_damage(amount: int) -> void:
+	get_tree().paused = true
+	$"../Player/PlayerCamera/InGameUI".hide()
+	$"../Player/PlayerCamera/FuelMeterBar".hide()
+	$"../Player/PlayerCamera/HealthBar".hide()
+	dating_sim_scene.show()
+	var remaining := amount
+	
+	
+	# Shields absorb first
+	if shield > 0: 
+		remaining = max(0, amount - shield)
+		shield = max(shield - amount, 0)
+
+	# Health takes remaining
+	if remaining > 0:
+		health = max(health - remaining, 0)
+
+	# Visual feedback always
+	flash_damage()
+	
+
+	#print("Ship took ", amount, " damage! Remaining health: ", health)
+
+	emit_stats()
+
+	# Now check death
+	if health == 0:
+		death()
