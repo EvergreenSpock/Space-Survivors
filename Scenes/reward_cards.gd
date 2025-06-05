@@ -49,9 +49,9 @@ var early_upgrades = [
 ]
 
 var advanced_upgrades = [
-	{"name": "Shield System", "desc": "Grants regenerating shields", "id": "shield_upgrade_bool"},
-	{"name": "Shotgun Weapon", "desc": "Unlocks a powerful short-range weapon", "id": "shotgun_upgrade_bool"},
-	{"name": "Ship Roll", "desc": "Gain evasive roll movement", "id": "evasive_upgrade_bool"}
+	{"name": " シールドをアンロック", "desc": "Grants regenerating shields", "id": "shield_upgrade_bool"},
+	{"name": " さんだんじゅうをアンロック", "desc": "Unlocks a powerful short-range weapon", "id": "shotgun_upgrade_bool"},
+	{"name": " シップのみかわしアップ–をアンロック", "desc": "Gain evasive roll movement", "id": "evasive_upgrade_bool"}
 ]
 
 var shotgun_upgrades = [
