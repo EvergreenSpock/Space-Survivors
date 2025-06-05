@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfnmqua8qf7mo"]
+[gd_scene load_steps=9 format=3 uid="uid://bfnmqua8qf7mo"]
 
 [ext_resource type="Script" uid="uid://b7oi7y7t2axw3" path="res://Scenes/dating_sim_manager.gd" id="1_livqs"]
 [ext_resource type="Texture2D" uid="uid://dk1gw8proqxao" path="res://addons/shipchan-removebg-preview.png" id="1_ljowk"]
 [ext_resource type="Texture2D" uid="uid://bynv43v5tjjk1" path="res://addons/shipsan-removebg-preview.png" id="2_o6myv"]
 [ext_resource type="Script" uid="uid://c16f08w780ydo" path="res://Scenes/text_box.gd" id="4_46cfc"]
+[ext_resource type="Texture2D" uid="uid://dyd6eiwc33qko" path="res://Blue menu assets/ben-san.jpg" id="5_kyoxo"]
+[ext_resource type="Texture2D" uid="uid://evxp1aem4c2b" path="res://Blue menu assets/amongus.png" id="6_7chxh"]
+[ext_resource type="Texture2D" uid="uid://b5m30vlxdjjmt" path="res://Blue menu assets/ben-sensei.jpg" id="7_rjc2s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6myv"]
 bg_color = Color(0.548963, 0.548963, 0.548962, 0.4)
@@ -65,3 +68,50 @@ text = "
 "
 fit_content = true
 script = ExtResource("4_46cfc")
+
+[node name="TheEnd" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="EndText" type="RichTextLabel" parent="TheEnd"]
+custom_minimum_size = Vector2(1000, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -250.0
+offset_right = 500.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "To be continued!! 
+Thank you to my lovely wife for drawing some of the assets <3
+
+Thank you to everyone who helped me correct my Dating Sim Dialogue!!!
+
+Thank you to sensei as well for being very cool and very bald"
+horizontal_alignment = 1
+
+[node name="Ben-san" type="Sprite2D" parent="TheEnd"]
+position = Vector2(426, 697)
+scale = Vector2(0.548962, 0.147089)
+texture = ExtResource("5_kyoxo")
+
+[node name="Amongus" type="Sprite2D" parent="TheEnd"]
+position = Vector2(1469, 712)
+scale = Vector2(0.608553, 0.608553)
+texture = ExtResource("6_7chxh")
+
+[node name="Ben-sensei" type="Sprite2D" parent="TheEnd"]
+position = Vector2(1576.79, 295.359)
+scale = Vector2(0.286582, 0.284988)
+texture = ExtResource("7_rjc2s")
