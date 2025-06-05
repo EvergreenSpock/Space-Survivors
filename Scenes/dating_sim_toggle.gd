@@ -1,14 +1,15 @@
-extends Label
+extends Button
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	update_level()
+	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	update_level()
+func _process(delta: float) -> void:
+	pass
 
-func update_level():
-	text=" レベル: " +str(Global.player_level)
+
+func _on_pressed() -> void:
+	Global.dating_sim_toggle = true

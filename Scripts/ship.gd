@@ -19,6 +19,7 @@ func _ready() -> void:
 	emit_stats()
 
 func apply_damage(amount: int) -> void:
+	
 	var remaining := amount
 	
 	# Shields absorb first
