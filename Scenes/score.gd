@@ -11,4 +11,4 @@ func _process(_delta: float) -> void:
 	update_score()
 
 func update_score():
-	text="Score: " +str(Global.player_score)
+	text=" スコア: " +str(Global.player_score)
