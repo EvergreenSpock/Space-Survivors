@@ -101,11 +101,12 @@ func death() -> void:
 	queue_free()
 	
 func apply_damage(amount: int) -> void:
-	get_tree().paused = true
-	$"../Player/PlayerCamera/InGameUI".hide()
-	$"../Player/PlayerCamera/FuelMeterBar".hide()
-	$"../Player/PlayerCamera/HealthBar".hide()
-	dating_sim_scene.show()
+	if Global.dating_sim_toggle:
+		get_tree().paused = true
+		$"../Player/PlayerCamera/InGameUI".hide()
+		$"../Player/PlayerCamera/FuelMeterBar".hide()
+		$"../Player/PlayerCamera/HealthBar".hide()
+		dating_sim_scene.show()
 	var remaining := amount
 	
 	

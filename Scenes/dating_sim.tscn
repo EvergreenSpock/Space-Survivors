@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfnmqua8qf7mo"]
+[gd_scene load_steps=6 format=3 uid="uid://bfnmqua8qf7mo"]
 
+[ext_resource type="Script" uid="uid://b7oi7y7t2axw3" path="res://Scenes/dating_sim_manager.gd" id="1_livqs"]
 [ext_resource type="Texture2D" uid="uid://dk1gw8proqxao" path="res://addons/shipchan-removebg-preview.png" id="1_ljowk"]
 [ext_resource type="Texture2D" uid="uid://bynv43v5tjjk1" path="res://addons/shipsan-removebg-preview.png" id="2_o6myv"]
+[ext_resource type="Script" uid="uid://c16f08w780ydo" path="res://Scenes/text_box.gd" id="4_46cfc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6myv"]
 bg_color = Color(0.548963, 0.548963, 0.548962, 0.4)
@@ -14,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_livqs")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -41,21 +44,24 @@ offset_bottom = 773.0
 rotation = 0.270526
 texture = ExtResource("2_o6myv")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Background"]
-custom_minimum_size = Vector2(1800, 160)
+[node name="G372B-D1" type="RichTextLabel" parent="Background"]
+process_mode = 3
+custom_minimum_size = Vector2(900, 160)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -900.0
-offset_top = -160.0
+offset_left = -238.0
+offset_top = -218.0
 offset_right = 900.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/normal_font_size = 38
 theme_override_styles/normal = SubResource("StyleBoxFlat_o6myv")
 bbcode_enabled = true
-text = "いたい!! that hurt!!"
+text = "
+"
 fit_content = true
+script = ExtResource("4_46cfc")

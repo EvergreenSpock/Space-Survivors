@@ -17,12 +17,12 @@
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jv6wh"]
 panorama = ExtResource("2_6l7je")
 
-[sub_resource type="Sky" id="Sky_x6ack"]
+[sub_resource type="Sky" id="Sky_ioaeq"]
 sky_material = SubResource("PanoramaSkyMaterial_jv6wh")
 
 [sub_resource type="Environment" id="Environment_iacmt"]
 background_mode = 2
-sky = SubResource("Sky_x6ack")
+sky = SubResource("Sky_ioaeq")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6l7je"]
 size = Vector3(60, 2, 60)
@@ -80,12 +80,6 @@ skeleton = NodePath("../GroundCollision")
 
 [node name="Enemy" parent="." instance=ExtResource("5_iacmt")]
 transform = Transform3D(-0.0925965, 0, -0.995704, 0, 1, 0, 0.995704, 0, -0.0925965, -18.0011, 1, -1.464)
-desired_distance = 20.0
-distance_tolerance = 5.0
-max_distance = 40.0
-speed = 30
-max_health = 100
-max_shield = 100
 
 [node name="xp_orb" parent="." instance=ExtResource("7_maf8m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.55674, -1.01817, -16.503)

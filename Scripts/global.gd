@@ -18,6 +18,7 @@ var roll_cooldown_reduction := 0.0
 var explosive_roll_burst_bool_upgrade := false
 var max_shield_percentage_upgrade := 0.0
 var faster_shield_regen_cooldown_upgrade = 0
+var dating_sim_toggle = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

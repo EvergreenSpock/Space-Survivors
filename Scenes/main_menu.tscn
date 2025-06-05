@@ -1,0 +1,118 @@
+[gd_scene load_steps=9 format=3 uid="uid://dduunijmawy17"]
+
+[ext_resource type="Texture2D" uid="uid://bf22jeoj2dk10" path="res://Blue menu assets/BJ play.png" id="1_1ehe0"]
+[ext_resource type="Script" uid="uid://d4dqgd7u1juy4" path="res://Scenes/main_menu.gd" id="1_ce3w2"]
+[ext_resource type="Texture2D" uid="uid://dq2jfvirdcni3" path="res://Blue menu assets/BJ settings.png" id="2_ce3w2"]
+[ext_resource type="Texture2D" uid="uid://c1u8wbp0vhw48" path="res://Blue menu assets/BJ exit.png" id="3_n45e2"]
+[ext_resource type="Texture2D" uid="uid://bejqxhj4aasnp" path="res://Scenes/panorama_image.png" id="5_n45e2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ce3w2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_opfnp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n45e2"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_ce3w2")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_n45e2")
+
+[node name="BjPlay" type="TextureRect" parent="Control/Background"]
+layout_mode = 2
+offset_left = 3040.0
+offset_top = 1810.0
+offset_right = 3440.0
+offset_bottom = 2210.0
+texture = ExtResource("1_1ehe0")
+expand_mode = 4
+
+[node name="Play" type="Button" parent="Control/Background/BjPlay"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+offset_left = -5.0
+offset_top = 78.0
+offset_right = 395.0
+offset_bottom = 259.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ce3w2")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ce3w2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ce3w2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_ce3w2")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ce3w2")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_ce3w2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ce3w2")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ce3w2")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ce3w2")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_ce3w2")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ce3w2")
+
+[node name="BjExit" type="TextureRect" parent="Control/Background"]
+custom_minimum_size = Vector2(400, 400)
+offset_left = 3040.0
+offset_top = 2210.0
+offset_right = 3440.0
+offset_bottom = 2610.0
+texture = ExtResource("3_n45e2")
+
+[node name="Quit" type="Button" parent="Control/Background/BjExit"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+offset_left = -5.0
+offset_top = 86.0
+offset_right = 395.0
+offset_bottom = 256.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_opfnp")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_opfnp")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_opfnp")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_opfnp")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_opfnp")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_opfnp")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_opfnp")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_opfnp")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_opfnp")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_opfnp")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_opfnp")
+
+[node name="BjSettings" type="TextureRect" parent="Control/Background"]
+custom_minimum_size = Vector2(400, 400)
+offset_left = 3040.0
+offset_top = 2010.0
+offset_right = 3440.0
+offset_bottom = 2410.0
+texture = ExtResource("2_ce3w2")
+
+[node name="Settings" type="Button" parent="Control/Background/BjSettings"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+offset_top = 84.0
+offset_right = 400.0
+offset_bottom = 251.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n45e2")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_n45e2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_n45e2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_n45e2")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_n45e2")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_n45e2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_n45e2")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_n45e2")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_n45e2")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_n45e2")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_n45e2")
+
+[connection signal="pressed" from="Control/Background/BjPlay/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Control/Background/BjExit/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Control/Background/BjSettings/Settings" to="." method="_on_settings_pressed"]

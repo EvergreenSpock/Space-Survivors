@@ -19,33 +19,33 @@ var rng = RandomNumberGenerator.new()
 
 # Rarity appearance and effects
 var rarities = {
-	"Common": Color("ffffff"),
-	"Uncommon": Color("55ff55"),
-	"Rare": Color("5599ff"),
-	"Legendary": Color("ffcc00")
+	"ノーマル": Color("ffffff"),
+	"レア": Color("55ff55"),
+	"SR": Color("5599ff"),
+	"レジェンダリー": Color("ffcc00")
 }
 
 # Upgrade effect multipliers by rarity
 var rarity_value_multipliers = {
-	"Common": 1.0,
-	"Uncommon": 1.5,
-	"Rare": 2.0,
-	"Legendary": 3.0
+	"ノーマル": 1.0,
+	"レア": 1.5,
+	"SR": 2.0,
+	"レジェンダリー": 3.0
 }
 
 # Weighted rarity chances
 var rarity_weights = {
-	"Common": 60,
-	"Uncommon": 25,
-	"Rare": 12,
-	"Legendary": 3
+	"ノーマル": 60,
+	"レア": 25,
+	"SR": 12,
+	"レジェンダリー": 3
 }
 
 # Upgrade pools by category
 var early_upgrades = [
-	{"name": "Health Upgrade", "desc": "+25 Max Health", "id": "max_health_upgrade", "value": 25},
-	{"name": "Fuel Capacity", "desc": "+20 Max Fuel", "id": "max_fuel_upgrade", "value": 20},
-	{"name": "Basic Weapon Damage", "desc": "+10% Bullet Damage", "id": "start_gun_damage_percentage_upgrade", "value": 0.10}
+	{"name": "HPアップグレード", "desc": "+25 Max Health", "id": "max_health_upgrade", "value": 25},
+	{"name": " フューエルプグレード", "desc": "+20 Max Fuel", "id": "max_fuel_upgrade", "value": 20},
+	{"name": " こうげきアップグレード", "desc": "+10% Bullet Damage", "id": "start_gun_damage_percentage_upgrade", "value": 0.10}
 ]
 
 var advanced_upgrades = [
@@ -160,7 +160,7 @@ func get_weighted_rarity() -> String:
 		cumulative += rarity_weights[rarity]
 		if roll <= cumulative:
 			return rarity
-	return "Common"
+	return "ノーマル"
 
 # Card selection handlers - apply only the selected upgrade
 func _on_middle_card_select_pressed() -> void:
